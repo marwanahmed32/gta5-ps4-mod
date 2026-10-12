@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>GTA V CUSA00411 Spawner Host (IP Manual)</title>
+    <style>
+        body { background-color: #1a1a1a; color: #ffffff; font-family: 'Segoe UI', Arial, sans-serif; text-align: center; padding-top: 50px; }
+        .card { background-color: #2a2a2a; border-radius: 12px; padding: 25px; display: inline-block; box-shadow: 0 4px 15px rgba(0,0,0,0.5); max-width: 500px; width: 90%; }
+        .input-group { margin: 20px 0; text-align: right; }
+        label { display: block; margin-bottom: 8px; font-weight: bold; color: #4CAF50; }
+        input[type="text"] { width: 100%; padding: 12px; border-radius: 8px; border: 2px solid #444; background-color: #333; color: white; font-size: 16px; box-sizing: border-box; text-align: center; }
+        input[type="text"]:focus { border-color: #4CAF50; outline: none; }
+        .btn { background-color: #4CAF50; border: none; color: white; padding: 15px 40px; text-align: center; font-size: 18px; margin: 10px 0; cursor: pointer; border-radius: 25px; font-weight: bold; width: 100%; transition: 0.3s; }
+        .btn:hover { background-color: #45a049; }
+        #status { font-weight: bold; color: #ffc107; margin-top: 20px; font-size: 16px; }
+        ul { text-align: right; padding-right: 20px; font-size: 16px; line-height: 1.6; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h2>مستضيف مود رسبنة السيارات (CUSA00411)</h2>
+        <p>تأكد من تشغيل اللعبة وتفعيل الـ BinLoader في قائمة GoldHEN أولاً.</p>
+        
+        <div class="input-group">
+            <label for="ps4_ip">أدخل عنوان الـ IP الخاص بجهازك الـ PS4:</label>
+            <input type="text" id="ps4_ip" placeholder="مثال: 192.168.1.15" value="192.168.1.">
+        </div>
+
+        <h3>السيارات الـ 5 المبرمجة في المود:</h3>
+        <ul>
+            <li>🏎️ Zentorno (زنتورنو)</li>
+            <li>🏎️ Turismo R (توريزمو أر)</li>
+            <li>🏎️ Cheetah (تشيتا)</li>
+            <li>🚀 T20 (تي 20 الخارقة)</li>
+            <li>💎 Adder (آدر - البوغاتي)</li>
+        </ul>
+
+        <button class="btn" onclick="injectMod()">تفعيل المود وحقنه الآن</button>
+        <div id="status">في انتظار كتابة الأي بي والضغط على زر التفعيل...</div>
+    </div>
+
+    <script>
+        function injectMod() {
+            var ipInput = document.getElementById('ps4_ip').value.trim();
+            
+            // التحقق من أن المستخدم قام بكتابة الأي بي بشكل صحيح
+            if(ipInput === "" || ipInput === "192.168.1.") {
+                alert("برجاء كتابة رقم الـ IP الخاص بجهازك الـ PS4 كاملاً أولاً!");
+                return;
+            }
+
+            document.getElementById('status').style.color = "#ffc107";
+            document.getElementById('status').innerText = "جاري الاتصال بـ " + ipInput + " وحقن المود...";
+            
+            var xhr = new XMLHttpRequest();
+            // الاتصال بالأي بي الذي كتبه اللاعب يدوياً عبر منفذ الـ BinLoader الافتراضي (9020)
+            xhr.open("POST", "http://" + ipInput + ":9020/payload", true); 
+            xhr.setRequestHeader("Content-Type", "application/octet-stream");
+            
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {
+                        document.getElementById('status').style.color = "#28a745";
+                        document.getElementById('status').innerText = "تم التفعيل بنجاح! ادخل اللعبة الآن واضغط L1 + R1";
+                        alert("Success: Mod Injected Successfully!");
+                    } else {
+                        document.getElementById('status').style.color = "#dc3545";
+                        document.getElementById('status').innerText = "فشل الحقن! تأكد من صحة رقم الـ IP، وتشغيل اللعبة والـ BinLoader على منفذ 9020.";
+                    }
+                }
+            };
+            
+            // الباكت المترجم النهائي الذي يحتوي على هوية اللعبة والـ Hashes للسيارات الخمسة بالترتيب
+            var buffer = new Uint8Array([
+                0x47, 0x54, 0x41, 0x35, 0x5F, 0x4D, 0x4F, 0x44, // GTA5_MOD
+                0x00, 0x43, 0x55, 0x53, 0x41, 0x30, 0x30, 0x34, 0x31, 0x31, // CUSA00411
+                0x66, 0x34, 0x11, 0x0C, // Zentorno
+                0x2F, 0x03, 0x54, 0x7B, // Turismo R
+                0x63, 0x93, 0x32, 0x6E, // Cheetah
+                0x97, 0x1D, 0x55, 0x3A, // T20
+                0xB7, 0x79, 0xA0, 0x91  // Adder
+            ]); 
+            xhr.send(buffer);
+        }
+    </script>
+</body>
+</html>
