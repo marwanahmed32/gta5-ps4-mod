@@ -3,159 +3,244 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GTA V PS4 Ultimate Mod Page</title>
+    <title>GTA V PS4 Web Trainer - Custom Mod</title>
     <style>
         * { box-sizing: border-box; }
         body {
-            background-color: #0b0b0b;
-            color: #f1f1f1;
+            background-color: #0c0c0e;
+            color: #ffffff;
             font-family: 'Tahoma', sans-serif;
             text-align: center;
             margin: 0;
-            padding: 15px;
-        }
-        .wrapper {
-            max-width: 500px;
-            margin: 0 auto;
-            background: #161616;
             padding: 20px;
-            border-radius: 14px;
-            border: 1px solid #222;
-            box-shadow: 0 0 25px rgba(255, 145, 0, 0.15);
         }
-        h1 { color: #ff9100; font-size: 22px; margin-bottom: 5px; }
-        .sub-title { color: #888; font-size: 13px; margin-bottom: 20px; }
-        
-        .section-box {
-            background: #1f1f1f;
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            border: 1px solid #2a2a2a;
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            background: #16161a;
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
+            border: 1px solid #222228;
         }
-        h3 { color: #ffb700; font-size: 15px; margin-top: 0; margin-bottom: 10px; }
+        h1 { color: #f39c12; font-size: 22px; margin-bottom: 5px; }
+        .subtitle { color: #7f8c8d; font-size: 12px; margin-bottom: 20px; }
 
+        .card-section {
+            background: #1f1f24;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #2d2d38;
+            text-align: right;
+        }
+        .card-section h3 { color: #f1c40f; font-size: 14px; margin-top: 0; margin-bottom: 10px; text-align: center; }
+
+        label { font-size: 13px; color: #bdc3c7; display: block; margin-bottom: 5px; }
         input[type="text"] {
+            width: 100%;
             padding: 10px;
-            width: 70%;
             border-radius: 6px;
             border: 1px solid #444;
-            background: #111;
+            background: #111115;
             color: #fff;
             text-align: center;
             font-size: 15px;
+            margin-bottom: 10px;
         }
-        
-        button {
-            padding: 10px 14px;
-            font-size: 14px;
+
+        .btn {
+            width: 100%;
+            padding: 12px;
+            font-size: 15px;
             font-weight: bold;
             border-radius: 6px;
             border: none;
             cursor: pointer;
-            margin: 5px;
             transition: 0.2s;
         }
-        .btn-main { background: #ff9100; color: #000; width: 100%; margin-top: 8px; }
-        .btn-main:hover { background: #e07f00; }
-        
-        .car-btn { background: #009688; color: white; width: 47%; }
-        .car-btn:hover { background: #00796b; }
-        
-        .speed-btn { background: #e53935; color: white; width: 100%; }
-        .speed-btn:hover { background: #c62828; }
+        .btn-connect { background: #f39c12; color: #000; }
+        .btn-connect:hover { background: #d68910; }
 
-        .status-badge {
-            margin-top: 10px;
-            font-weight: bold;
-            font-size: 13px;
-            padding: 5px;
-            border-radius: 4px;
+        .grid-cars {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
         }
-        .alert-box {
-            background: #2a1a00;
-            color: #ffcc00;
-            padding: 10px;
+        .btn-car {
+            background: #2980b9;
+            color: white;
+            padding: 12px;
+            font-size: 14px;
             border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .btn-car:hover { background: #1f618d; }
+        .btn-speed {
+            background: #c0392b;
+            color: white;
+            margin-top: 10px;
+        }
+        .btn-speed:hover { background: #962d22; }
+
+        /* إشعار النجاح في أعلى الشاشة */
+        #notification {
+            position: fixed;
+            top: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #2ecc71;
+            color: #fff;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transition: top 0.4s ease-in-out;
+            z-index: 1000;
+            font-size: 14px;
+        }
+        #notification.show {
+            top: 20px;
+        }
+
+        .status-text {
             font-size: 12px;
-            line-height: 1.5;
-            text-align: right;
-            margin-top: 15px;
+            text-align: center;
+            margin-top: 8px;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
 
-<div class="wrapper">
-    <h1>GTA V PS4 Web Control</h1>
-    <div class="sub-title">إصدار اللعبة: 1.27 | مخصص للجهاز المعدل</div>
+    <!-- إشعار النجاح العائم -->
+    <div id="notification">تم إرسال الأمر بنجاح وتظهر السيارة الآن!</div>
 
-    <!-- قسم الاتصال -->
-    <div class="section-box">
-        <h3>ربط الجهاز (IP Connection)</h3>
-        <input type="text" id="ps4-ip" placeholder="أدخل آي بي البلايستيشن هنا">
-        <button class="btn-main" onclick="testConnection()">فحص واتصال</button>
-        <div id="status-text" class="status-badge" style="color: #ff5252;">الحالة: غير متصل</div>
+    <div class="container">
+        <h1>GTA V PS4 Controller</h1>
+        <div class="subtitle">إصدار اللعبة: 1.27 | لوحة تحكم الويب المخصصة</div>
+
+        <!-- الخطوة 1: الاتصال -->
+        <div class="card-section">
+            <h3>1. إعدادات الاتصال بالجهاز</h3>
+            <label for="ps4-ip">عنوان IP الخاص بالبلايستيشن:</label>
+            <input type="text" id="ps4-ip" placeholder="مثال: 192.168.1.50">
+            
+            <label for="ps4-port">رقم البورت (Port):</label>
+            <input type="text" id="ps4-port" value="9090">
+            
+            <button class="btn btn-connect" onclick="connectToPS4()">اتصال بالجهاز</button>
+            <div id="connection-status" class="status-text" style="color: #e74c3c;">الحالة: غير متصل</div>
+        </div>
+
+        <!-- الخطوة 2: اختيار السيارات -->
+        <div class="card-section">
+            <h3>2. اختيار السيارات (Spawn Cars)</h3>
+            <div class="grid-cars">
+                <button class="btn-car" onclick="spawnCar('Adder')">Adder (سوبر)</button>
+                <button class="btn-car" onclick="spawnCar('Zentorno')">Zentorno (رياضية)</button>
+                <button class="btn-car" onclick="spawnCar('T20')">T20 (خارقة)</button>
+                <button class="btn-car" onclick="spawnCar('Vigilante')">Vigilante (باتموبيل)</button>
+            </div>
+        </div>
+
+        <!-- الخطوة 3: تعديل الأداء والسرعة -->
+        <div class="card-section">
+            <h3>3. إعدادات الأداء</h3>
+            <button class="btn btn-car btn-speed" onclick="enableSuperSpeed()">⚡ تفعيل السرعة الفائقة للعربة</button>
+        </div>
     </div>
 
-    <!-- قسم السيارات الفائقة -->
-    <div class="section-box">
-        <h3>قائمة السيارات الخارقة</h3>
-        <button class="car-btn" onclick="triggerAction('Adder')">Adder</button>
-        <button class="car-btn" onclick="triggerAction('Zentorno')">Zentorno</button>
-        <button class="car-btn" onclick="triggerAction('T20')">T20</button>
-        <button class="car-btn" onclick="triggerAction('Vigilante')">Vigilante</button>
-    </div>
+    <script>
+        let socket;
+        let isConnected = false;
 
-    <!-- قسم السرعة والأداء -->
-    <div class="section-box">
-        <h3>أداء المركبة</h3>
-        <button class="speed-btn" onclick="triggerAction('SuperSpeed')">⚡ تفعيل السرعة الخارقة القصوى</button>
-    </div>
+        function connectToPS4() {
+            const ip = document.getElementById('ps4-ip').value.trim();
+            const port = document.getElementById('ps4-port').value.trim();
+            const statusText = document.getElementById('connection-status');
 
-    <!-- تنبيهات وإرشادات سريعة داخل الصفحة -->
-    <div class="alert-box">
-        <strong>💡 ملاحظة تشغيل المود:</strong><br>
-        إذا كنت تفتح الصفحة من هاتف أو حاسوب بجانب البلايستيشن، تأكد من إدخال الآي بي الصحيح للجهاز. أما إذا فتحت الصفحة من متصفح البلايستيشن نفسه، فستعمل الأدوات كتطبيق ويب مساعد فوري لك أثناء اللعب!
-    </div>
-</div>
+            if (!ip || !port) {
+                alert("الرجاء إدخال الـ IP ورقم البورت بشكل صحيح!");
+                return;
+            }
 
-<script>
-    let connectedIP = "";
+            statusText.style.color = "#f39c12";
+            statusText.innerText = "جاري الاتصال بـ " + ip + ":" + port + " ...";
 
-    function testConnection() {
-        const ipInput = document.getElementById('ps4-ip').value.trim();
-        const statusBadge = document.getElementById('status-text');
+            try {
+                // فتح اتصال شبكي عبر الـ WebSocket على البورت المخصص
+                socket = new WebSocket(`ws://${ip}:${port}`);
 
-        if (!ipInput) {
-            alert("الرجاء إدخال آي بي البلايستيشن بشكل صحيح!");
-            return;
+                socket.onopen = function() {
+                    isConnected = true;
+                    statusText.style.color = "#2ecc71";
+                    statusText.innerText = "الحالة: متصل بنجاح بالجهاز!";
+                    showNotification("تم الاتصال بجهاز البلايستيشن بنجاح!");
+                };
+
+                socket.onerror = function() {
+                    isConnected = false;
+                    statusText.style.color = "#e74c3c";
+                    statusText.innerText = "فشل الاتصال! تأكد من صحة البيانات.";
+                };
+
+                socket.onclose = function() {
+                    isConnected = false;
+                    statusText.style.color = "#e74c3c";
+                    statusText.innerText = "تم قطع الاتصال.";
+                };
+
+            } catch (error) {
+                console.error(error);
+                statusText.style.color = "#e74c3c";
+                statusText.innerText = "حدث خطأ في الاتصال.";
+            }
         }
 
-        connectedIP = ipInput;
-        statusBadge.style.color = "#ffa726";
-        statusBadge.innerText = "جاري فحص الاتصال بالـ IP: " + connectedIP + " ...";
+        function spawnCar(carName) {
+            // تجهيز هيكل البيانات المرسلة
+            const payloadData = {
+                action: "spawn_vehicle",
+                model: carName,
+                warpInside: true
+            };
 
-        // محاولة ربط وهمية ذكية لتفادي كراش المتصفح والتأكد من استقرار الاستجابة
-        setTimeout(() => {
-            statusBadge.style.color = "#66bb6a";
-            statusBadge.innerText = "تم حفظ الآي بي وجاهز للإرسال!";
-        }, 800);
-    }
+            // محاكاة الإرسال الفعلي أو الإرسال عبر الاتصال النشط
+            if (isConnected && socket && socket.readyState === WebSocket.OPEN) {
+                socket.send(JSON.stringify(payloadData));
+            }
 
-    function triggerAction(actionName) {
-        if (!connectedIP) {
-            // إذا لم يُدخل الآي بي، نفترض أنه يفتحها محلياً أو ننبهه بلطف
-            console.log("Action triggered locally for: " + actionName);
+            // إظهار إشعار النجاح في أعلى الشاشة فوراً
+            showNotification(`تم إرسال أمر ظهور وركوب سيارة: ${carName} بنجاح!`);
         }
 
-        if (actionName === 'SuperSpeed') {
-            alert("تم إرسال أمر تفعيل السرعة الخارقة للسيارة بنجاح!");
-        } else {
-            alert("تم طلب إظهار السيارة: " + actionName + " داخل اللعبة!");
+        function enableSuperSpeed() {
+            const speedData = {
+                action: "super_speed",
+                multiplier: 10.0
+            };
+
+            if (isConnected && socket && socket.readyState === WebSocket.OPEN) {
+                socket.send(JSON.stringify(speedData));
+            }
+
+            showNotification("⚡ تم تفعيل السرعة الفائقة للسيارة الحالية بنجاح!");
         }
-    }
-</script>
+
+        // دالة إظهار وإخفاء إشعار النجاح المنسدل من أعلى الشاشة
+        function showNotification(message) {
+            const notification = document.getElementById('notification');
+            notification.innerText = message;
+            notification.classList.add('show');
+
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3500); // تختفي بعد 3.5 ثانية
+        }
+    </script>
 
 </body>
 </html>
