@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GTA V PS4 Mod Menu - v1.27</title>
+    <style>
+        body {
+            background-color: #111;
+            color: #fff;
+            font-family: Tahoma, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 20px;
+        }
+        .card {
+            max-width: 550px;
+            margin: 0 auto;
+            background: #1c1c1c;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 0 20px rgba(255, 153, 0, 0.3);
+        }
+        h1 { color: #ff9900; font-size: 24px; }
+        .box { margin: 15px 0; }
+        input[type="text"] {
+            padding: 10px;
+            width: 65%;
+            border-radius: 6px;
+            border: 1px solid #444;
+            background: #262626;
+            color: #fff;
+            text-align: center;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 18px;
+            font-size: 15px;
+            font-weight: bold;
+            border-radius: 6px;
+            border: none;
+            cursor: pointer;
+            margin: 6px;
+            transition: 0.2s;
+        }
+        .btn-connect { background: #ff9900; color: #000; }
+        .btn-connect:hover { background: #e68a00; }
+        .btn-car { background: #008cba; color: #white; width: 44%; }
+        .btn-car:hover { background: #007399; }
+        .btn-speed { background: #ff3333; color: white; width: 92%; }
+        .btn-speed:hover { background: #cc0000; }
+        .status { margin-top: 10px; font-weight: bold; font-size: 14px; }
+        .divider { border-color: #333; margin: 20px 0; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h1>GTA V PS4 Mod Menu</h1>
+    <p>إصدار اللعبة: 1.27 | الاتصال: WebRTE (Port 9090)</p>
+
+    <!-- خانة الآي بي -->
+    <div class="box">
+        <input type="text" id="ps4-ip" placeholder="أدخل آي بي البلايستيشن هنا (مثال: 192.168.1.15)">
+        <br><br>
+        <button class="btn-connect" onclick="connectPS4()">اتصال بالجهاز</button>
+        <div id="conn-status" class="status" style="color: #ff4d4d;">الحالة: غير متصل</div>
+    </div>
+
+    <hr class="divider">
+
+    <!-- قائمة السيارات -->
+    <h3 style="color: #ff9900;">قائمة السيارات فائقة السرعة</h3>
+    <div class="box">
+        <button class="btn-car" onclick="spawnCar('adder')">Adder</button>
+        <button class="btn-car" onclick="spawnCar('zentorno')">Zentorno</button>
+        <button class="btn-car" onclick="spawnCode('t20')">T20</button>
+        <button class="btn-car" onclick="spawnCar('vigilante')">Vigilante</button>
+    </div>
+
+    <!-- تعديل السرعة -->
+    <h3 style="color: #ff9900;">التحكم بالأداء</h3>
+    <div class="box">
+        <button class="btn-speed" onclick="setSuperSpeed()">تفعيل السرعة الخارقة للسيارة</button>
+    </div>
+</div>
+
+<script>
+    let socket;
+    let connected = false;
+
+    function connectPS4() {
+        const ip = document.getElementById('ps4-ip').value.trim();
+        const statusEl = document.getElementById('conn-status');
+
+        if (!ip) {
+            alert("الرجاء كتابة عنوان IP الخاص بجهاز البلايستيشن أولاً!");
+            return;
+        }
+
+        statusEl.style.color = "#ffaa00";
+        statusEl.innerText = "جاري الاتصال بـ WebRTE...";
+
+        try {
+            // الاتصال بمنفذ 9090 الخاص بـ WebRTE / GoldHEN
+            socket = new WebSocket(`ws://${ip}:9090`);
+
+            socket.onopen = function() {
+                connected = true;
+                statusEl.style.color = "#00ff66";
+                statusEl.innerText = "الحالة: متصل بنجاح بـ PS4!";
+            };
+
+            socket.onerror = function() {
+                connected = false;
+                statusEl.style.color = "#ff4d4d";
+                statusEl.innerText = "فشل الاتصال! تأكد من تشغيل باييلود WebRTE على البلايستيشن وأن الـ IP صحيح.";
+            };
+
+            socket.onclose = function() {
+                connected = false;
+                statusEl.style.color = "#ffaa00";
+                statusEl.innerText = "تم إغلاق الاتصال.";
+            };
+
+        } catch (e) {
+            console.error(e);
+            statusEl.style.color = "#ff4d4d";
+            statusEl.innerText = "حدث خطأ في الاتصال.";
+        }
+    }
+
+    function sendPayloadCommand(data) {
+        if (!connected || !socket) {
+            alert("يجب الاتصال بجهاز البلايستيشن عبر زر (اتصال) أولاً!");
+            return;
+        }
+        socket.send(JSON.stringify(data));
+    }
+
+    function spawnCar(carName) {
+        // هيكل أمر إرسال البيانات للعبة عبر الـ WebRTE للنسخة 1.27
+        sendPayloadCommand({
+            request: "spawn_vehicle",
+            model: carName,
+            warp: true // لكي يركب اللاعب السيارة فور ظهورها تلقائياً
+        });
+        console.slog?.("Spawned: " + carName);
+    }
+
+    function setSuperSpeed() {
+        // أمر تعديل مضاعف سرعة محرك المركبة الحالية في الذاكرة
+        sendPayloadCommand({
+            request: "modify_vehicle",
+            property: "topspeed",
+            multiplier: 8.0
+        });
+        alert("تم رفع سرعة السيارة إلى الحد الأقصى الخارق!");
+    }
+</script>
+
+</body>
+</html>
