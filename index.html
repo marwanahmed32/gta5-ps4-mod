@@ -1,246 +1,141 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GTA V PS4 Web Trainer - Custom Mod</title>
-    <style>
-        * { box-sizing: border-box; }
-        body {
-            background-color: #0c0c0e;
-            color: #ffffff;
-            font-family: 'Tahoma', sans-serif;
-            text-align: center;
-            margin: 0;
-            padding: 20px;
-        }
-        .container {
-            max-width: 480px;
-            margin: 0 auto;
-            background: #16161a;
-            padding: 25px;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.7);
-            border: 1px solid #222228;
-        }
-        h1 { color: #f39c12; font-size: 22px; margin-bottom: 5px; }
-        .subtitle { color: #7f8c8d; font-size: 12px; margin-bottom: 20px; }
-
-        .card-section {
-            background: #1f1f24;
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #2d2d38;
-            text-align: right;
-        }
-        .card-section h3 { color: #f1c40f; font-size: 14px; margin-top: 0; margin-bottom: 10px; text-align: center; }
-
-        label { font-size: 13px; color: #bdc3c7; display: block; margin-bottom: 5px; }
-        input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            border-radius: 6px;
-            border: 1px solid #444;
-            background: #111115;
-            color: #fff;
-            text-align: center;
-            font-size: 15px;
-            margin-bottom: 10px;
-        }
-
-        .btn {
-            width: 100%;
-            padding: 12px;
-            font-size: 15px;
-            font-weight: bold;
-            border-radius: 6px;
-            border: none;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .btn-connect { background: #f39c12; color: #000; }
-        .btn-connect:hover { background: #d68910; }
-
-        .grid-cars {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-        }
-        .btn-car {
-            background: #2980b9;
-            color: white;
-            padding: 12px;
-            font-size: 14px;
-            border-radius: 6px;
-            border: none;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .btn-car:hover { background: #1f618d; }
-        .btn-speed {
-            background: #c0392b;
-            color: white;
-            margin-top: 10px;
-        }
-        .btn-speed:hover { background: #962d22; }
-
-        /* إشعار النجاح في أعلى الشاشة */
-        #notification {
-            position: fixed;
-            top: -60px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #2ecc71;
-            color: #fff;
-            padding: 12px 25px;
-            border-radius: 8px;
-            font-weight: bold;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            transition: top 0.4s ease-in-out;
-            z-index: 1000;
-            font-size: 14px;
-        }
-        #notification.show {
-            top: 20px;
-        }
-
-        .status-text {
-            font-size: 12px;
-            text-align: center;
-            margin-top: 8px;
-            font-weight: bold;
-        }
-    </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<meta name="theme-color" content="#2a0b10"/>
+<title>MOKHITO — مطعم وكافيه | القاهرة</title>
+<meta name="description" content="Mokhito — مطعم وكافيه في القاهرة. الأطباق وحجز طاولة عبر واتساب."/>
+<style>
+:root{--bg:#2a0b10;--bg2:#36111a;--ink:#f3e6d8;--mut:#b99f94;--ac:#ff7a59;--line:rgba(243,230,216,.18);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f3e6d8;--bg2:#eadbc9;--ink:#2a0b10;--mut:#7d5e57;--ac:#c9391f;--line:rgba(42,11,16,.2)}}
+:root[data-theme="light"]{--bg:#f3e6d8;--bg2:#eadbc9;--ink:#2a0b10;--mut:#7d5e57;--ac:#c9391f;--line:rgba(42,11,16,.2)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:'Cairo','Segoe UI',Tahoma,Arial,sans-serif;line-height:1.7;overflow-x:hidden}
+.mono{font-family:'Courier New',monospace;letter-spacing:2px;font-size:11px;text-transform:uppercase;direction:ltr}
+#pg{position:fixed;top:env(safe-area-inset-top,0px);right:0;height:3px;background:var(--ac);width:0;z-index:60}
+header{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:18px 24px;mix-blend-mode:difference;color:#fff}
+header b{font-size:18px;letter-spacing:3px;direction:ltr}
+.bg{background:none;border:0;color:inherit;font:inherit;cursor:pointer;display:flex;align-items:center;gap:10px}
+.bg i{display:block;width:30px;height:10px;border-top:2px solid currentColor;border-bottom:2px solid currentColor}
+.ov{position:fixed;inset:0;background:var(--ac);color:#1a0508;z-index:55;display:flex;flex-direction:column;justify-content:center;padding:40px;clip-path:circle(0 at 0 0);transition:clip-path .7s cubic-bezier(.7,0,.2,1)}
+.ov.on{clip-path:circle(150% at 0 0)}
+.ov a{font-size:clamp(40px,10vw,90px);font-weight:900;color:inherit;text-decoration:none;line-height:1.15;display:flex;gap:16px;align-items:baseline;transition:transform .3s}
+.ov a:hover{transform:translateX(-14px)}
+.ov a small{font-size:12px;font-family:'Courier New',monospace}
+.ov .x{position:absolute;top:calc(18px + env(safe-area-inset-top,0px));left:24px;background:none;border:0;font:inherit;font-weight:800;cursor:pointer;color:inherit}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 24px 40px;border-bottom:1px solid var(--line)}
+.hero h1{font-size:clamp(60px,21vw,260px);line-height:.82;font-weight:900;letter-spacing:-.05em;direction:ltr;text-align:right;color:var(--ac);margin-bottom:26px}
+.meta{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:16px;color:var(--mut)}
+.meta p{max-width:340px;font-size:15px;color:var(--ink)}
+.sec{padding:90px 24px;border-bottom:1px solid var(--line);max-width:1100px;margin:0 auto;display:grid;grid-template-columns:110px 1fr;gap:20px}
+.n{font-size:64px;font-weight:900;color:transparent;-webkit-text-stroke:1px var(--ac);line-height:1;direction:ltr;text-align:right}
+.big{font-size:clamp(26px,4.6vw,50px);font-weight:700;line-height:1.35}
+.big em{font-style:normal;color:var(--ac)}
+.sm{color:var(--mut);margin-top:18px;max-width:480px}
+.ac{border-top:1px solid var(--line)}
+.ac button{width:100%;background:none;border:0;border-bottom:1px solid var(--line);color:var(--ink);font:inherit;padding:20px 0;display:grid;grid-template-columns:50px 1fr 30px;align-items:center;text-align:right;cursor:pointer;transition:color .3s}
+.ac button:hover,.ac button.on{color:var(--ac)}
+.ac button span:nth-child(2){font-size:clamp(20px,3.4vw,30px);font-weight:700;direction:ltr;text-align:right}
+.ac button span:last-child{font-size:24px;transition:transform .35s;text-align:left}
+.ac button.on span:last-child{transform:rotate(45deg)}
+.ac .p{max-height:0;overflow:hidden;transition:max-height .45s;color:var(--mut);border-bottom:1px solid var(--line)}
+.ac .p div{padding:4px 50px 22px}
+.ac .p.on{max-height:120px}
+.note{font-size:12px;color:var(--mut);margin-top:16px}
+.ml{font-size:clamp(22px,4vw,40px);font-weight:700;line-height:2.3}
+.ml select,.ml input{font:inherit;font-weight:900;color:var(--ac);background:transparent;border:0;border-bottom:2px solid var(--ac);border-radius:0;padding:0 6px;outline:none;max-width:100%;cursor:pointer}
+.ml input{width:7em}
+.ml select option{color:#2a0b10;background:#f3e6d8;font-size:16px}
+.ml textarea{display:block;width:100%;margin-top:6px;font:inherit;font-size:15px;color:var(--ink);background:var(--bg2);border:1px solid var(--line);padding:12px;outline:none}
+.prev{white-space:pre-wrap;margin-top:26px;border:1px dashed var(--line);padding:16px;font-size:13px;color:var(--mut)}
+.send{margin-top:22px;background:var(--ac);color:#1a0508;border:0;padding:16px 36px;font:inherit;font-weight:900;font-size:16px;cursor:pointer;transition:transform .25s}
+.send:hover{transform:translateX(-8px)}
+.vis a{display:inline-block;margin-top:24px;font-size:clamp(28px,6vw,64px);font-weight:900;color:var(--ink);text-decoration:none;border-bottom:3px solid var(--ac);transition:color .3s}
+.vis a:hover{color:var(--ac)}
+footer{padding:30px 24px 50px;color:var(--mut);display:flex;justify-content:space-between}
+.rv{opacity:0;transform:translateY(30px);transition:1s}.rv.in{opacity:1;transform:none}
+@media(max-width:700px){.sec{grid-template-columns:1fr;gap:6px;padding:70px 22px}.n{font-size:44px}.ac button{grid-template-columns:34px 1fr 24px}.ac .p div{padding-inline-start:34px}}
+</style>
 </head>
 <body>
+<div id="pg"></div>
+<header><b>MOKHITO</b><button class="bg" id="op"><span class="mono">Menu</span><i></i></button></header>
+<div class="ov" id="ov"><button class="x" id="cl">إغلاق ✕</button>
+  <a href="#about"><small>01</small>عن المكان</a><a href="#dishes"><small>02</small>الأطباق</a><a href="#book"><small>03</small>الحجز</a><a href="#visit"><small>04</small>الموقع</a></div>
 
-    <!-- إشعار النجاح العائم -->
-    <div id="notification">تم إرسال الأمر بنجاح وتظهر السيارة الآن!</div>
+<section class="hero" id="top">
+  <div class="mono" style="color:var(--mut);margin-bottom:auto;padding-top:90px">Restaurant &amp; Café — Cairo</div>
+  <h1>MOKHITO</h1>
+  <div class="meta"><p>باستا وبيتزا وقهوة. جلسات داخلية وخارجية، وأكل بصوصات غنية.</p><div class="mono">Scroll ↓</div></div>
+</section>
 
-    <div class="container">
-        <h1>GTA V PS4 Controller</h1>
-        <div class="subtitle">إصدار اللعبة: 1.27 | لوحة تحكم الويب المخصصة</div>
+<section class="sec rv" id="about"><div class="n">01</div>
+  <div><div class="big">مكان هادي، <em>أكل بيتي،</em> وقعدة تطول.</div>
+  <p class="sm">زوار المكان بيمدحوا الباستا والصوصات والبيتزا الرقيقة والحلويات الإيطالية، والخدمة اللي بتلبي الطلبات الخاصة. فطار، قهوة، غدا أو عشا، جوه أو بره.</p></div></section>
 
-        <!-- الخطوة 1: الاتصال -->
-        <div class="card-section">
-            <h3>1. إعدادات الاتصال بالجهاز</h3>
-            <label for="ps4-ip">عنوان IP الخاص بالبلايستيشن:</label>
-            <input type="text" id="ps4-ip" placeholder="مثال: 192.168.1.50">
-            
-            <label for="ps4-port">رقم البورت (Port):</label>
-            <input type="text" id="ps4-port" value="9090">
-            
-            <button class="btn btn-connect" onclick="connectToPS4()">اتصال بالجهاز</button>
-            <div id="connection-status" class="status-text" style="color: #e74c3c;">الحالة: غير متصل</div>
-        </div>
+<section class="sec rv" id="dishes"><div class="n">02</div>
+  <div><div class="big" style="margin-bottom:28px">أطباق <em>يمدحها</em> الزوار</div>
+  <div class="ac" id="ac"></div>
+  <p class="note">* الأطباق من تقييمات عامة للمكان، والمنيو الكامل بالأسعار يتضاف من المطعم.</p></div></section>
 
-        <!-- الخطوة 2: اختيار السيارات -->
-        <div class="card-section">
-            <h3>2. اختيار السيارات (Spawn Cars)</h3>
-            <div class="grid-cars">
-                <button class="btn-car" onclick="spawnCar('Adder')">Adder (سوبر)</button>
-                <button class="btn-car" onclick="spawnCar('Zentorno')">Zentorno (رياضية)</button>
-                <button class="btn-car" onclick="spawnCar('T20')">T20 (خارقة)</button>
-                <button class="btn-car" onclick="spawnCar('Vigilante')">Vigilante (باتموبيل)</button>
-            </div>
-        </div>
+<section class="sec rv" id="book"><div class="n">03</div>
+  <div class="ml">
+    أحب أحجز طاولة يوم <select id="dsel"></select>
+    الساعة <select id="tsel"></select>
+    لعدد <select id="pp"></select> أفراد
+    في <select id="zn"><option>أي مكان متاح</option><option>الجلسة الخارجية</option><option>الداخل</option></select>
+    باسم <input id="nm" placeholder="اسمك"/>
+    <textarea id="nt" rows="2" placeholder="ملاحظات (اختياري): مناسبة، كرسي أطفال..."></textarea>
+    <div class="prev" id="pv"></div>
+    <button class="send" id="go">إرسال الطلب عبر واتساب ←</button>
+    <p class="note">الطلب غير مؤكد حتى يرد المطعم ويؤكد التوافر.</p>
+  </div></section>
 
-        <!-- الخطوة 3: تعديل الأداء والسرعة -->
-        <div class="card-section">
-            <h3>3. إعدادات الأداء</h3>
-            <button class="btn btn-car btn-speed" onclick="enableSuperSpeed()">⚡ تفعيل السرعة الفائقة للعربة</button>
-        </div>
-    </div>
+<section class="sec rv vis" id="visit"><div class="n">04</div>
+  <div><div class="big">تعالى <em>زورنا</em> في المنيل</div>
+  <a href="https://maps.app.goo.gl/qy3ge4Giy2mt8o2NA" target="_blank" rel="noopener">افتح الخريطة ↗</a></div></section>
+<footer class="mono"><span>© MOKHITO</span><span>Cairo</span></footer>
 
-    <script>
-        let socket;
-        let isConnected = false;
+<script>
+var WA_NUMBER=""; // رقم المطعم بصيغة دولية بدون + مثال: 2010xxxxxxxx
+var D=[["Pasta Siciliana","باستا بصوص طماطم ومارينارا، من أكتر الأطباق اللي الزوار بيمدحوها."],["Shrimp & Spinach Pasta","باستا بالجمبري والسبانخ."],["Chicken Pesto","باستا بالدجاج وصوص البيستو."],["Neapolitan Pizza","بيتزا إيطالية رقيقة بالريحان الطازج."],["Pesto Focaccia","فوكاتشيا بالبيستو."],["Italian Desserts & Coffee","حلويات إيطالية وقهوة لقعدة هادية."]];
+var ac=document.getElementById('ac');
+D.forEach(function(x,i){var b=document.createElement('button'),p=document.createElement('div');b.innerHTML='<span class="mono">0'+(i+1)+'</span><span>'+x[0]+'</span><span>+</span>';p.className='p';p.innerHTML='<div>'+x[1]+'</div>';
+ b.onclick=function(){var o=p.classList.contains('on');document.querySelectorAll('.ac .p').forEach(function(q){q.classList.remove('on')});document.querySelectorAll('.ac button').forEach(function(q){q.classList.remove('on')});if(!o){p.classList.add('on');b.classList.add('on')}};
+ ac.appendChild(b);ac.appendChild(p)});
 
-        function connectToPS4() {
-            const ip = document.getElementById('ps4-ip').value.trim();
-            const port = document.getElementById('ps4-port').value.trim();
-            const statusText = document.getElementById('connection-status');
+var ov=document.getElementById('ov');
+document.getElementById('op').onclick=function(){ov.classList.add('on')};
+function cl(){ov.classList.remove('on')}
+document.getElementById('cl').onclick=cl;ov.querySelectorAll('a').forEach(function(a){a.onclick=cl});
+var pg=document.getElementById('pg');
+addEventListener('scroll',function(){var h=document.documentElement;pg.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%'});
 
-            if (!ip || !port) {
-                alert("الرجاء إدخال الـ IP ورقم البورت بشكل صحيح!");
-                return;
-            }
-
-            statusText.style.color = "#f39c12";
-            statusText.innerText = "جاري الاتصال بـ " + ip + ":" + port + " ...";
-
-            try {
-                // فتح اتصال شبكي عبر الـ WebSocket على البورت المخصص
-                socket = new WebSocket(`ws://${ip}:${port}`);
-
-                socket.onopen = function() {
-                    isConnected = true;
-                    statusText.style.color = "#2ecc71";
-                    statusText.innerText = "الحالة: متصل بنجاح بالجهاز!";
-                    showNotification("تم الاتصال بجهاز البلايستيشن بنجاح!");
-                };
-
-                socket.onerror = function() {
-                    isConnected = false;
-                    statusText.style.color = "#e74c3c";
-                    statusText.innerText = "فشل الاتصال! تأكد من صحة البيانات.";
-                };
-
-                socket.onclose = function() {
-                    isConnected = false;
-                    statusText.style.color = "#e74c3c";
-                    statusText.innerText = "تم قطع الاتصال.";
-                };
-
-            } catch (error) {
-                console.error(error);
-                statusText.style.color = "#e74c3c";
-                statusText.innerText = "حدث خطأ في الاتصال.";
-            }
-        }
-
-        function spawnCar(carName) {
-            // تجهيز هيكل البيانات المرسلة
-            const payloadData = {
-                action: "spawn_vehicle",
-                model: carName,
-                warpInside: true
-            };
-
-            // محاكاة الإرسال الفعلي أو الإرسال عبر الاتصال النشط
-            if (isConnected && socket && socket.readyState === WebSocket.OPEN) {
-                socket.send(JSON.stringify(payloadData));
-            }
-
-            // إظهار إشعار النجاح في أعلى الشاشة فوراً
-            showNotification(`تم إرسال أمر ظهور وركوب سيارة: ${carName} بنجاح!`);
-        }
-
-        function enableSuperSpeed() {
-            const speedData = {
-                action: "super_speed",
-                multiplier: 10.0
-            };
-
-            if (isConnected && socket && socket.readyState === WebSocket.OPEN) {
-                socket.send(JSON.stringify(speedData));
-            }
-
-            showNotification("⚡ تم تفعيل السرعة الفائقة للسيارة الحالية بنجاح!");
-        }
-
-        // دالة إظهار وإخفاء إشعار النجاح المنسدل من أعلى الشاشة
-        function showNotification(message) {
-            const notification = document.getElementById('notification');
-            notification.innerText = message;
-            notification.classList.add('show');
-
-            setTimeout(() => {
-                notification.classList.remove('show');
-            }, 3500); // تختفي بعد 3.5 ثانية
-        }
-    </script>
-
+var DN=['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'],MN=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+var TIMES=[];for(var h=12;h<=23;h++){TIMES.push(h+':00');TIMES.push(h+':30')}
+var selD=null,selT=null,DS=document.getElementById('dsel'),TS=document.getElementById('tsel'),now=new Date(),DAYS=[];
+function f12(t){var p=t.split(':'),h=+p[0];return(h>12?h-12:h)+':'+p[1]+' '+(h>=12?'م':'ص')}
+function fillTimes(){var td=selD&&selD.toDateString()==new Date().toDateString(),n=new Date(),c=0;
+ TS.innerHTML='<option value="">اختار الوقت</option>';selT=null;
+ TIMES.forEach(function(t){var p=t.split(':');if(td&&(+p[0]*60+ +p[1])<=n.getHours()*60+n.getMinutes()+60)return;TS.innerHTML+='<option value="'+t+'">'+f12(t)+'</option>';c++});
+ if(!c)TS.innerHTML='<option value="">لا مواعيد اليوم</option>'}
+DS.innerHTML='<option value="">اختار اليوم</option>';
+for(var i=0;i<14;i++){var d=new Date(now);d.setDate(now.getDate()+i);DAYS.push(d);
+ DS.innerHTML+='<option value="'+i+'">'+(i==0?'اليوم — ':i==1?'بكرة — ':'')+DN[d.getDay()]+' '+d.getDate()+' '+MN[d.getMonth()]+'</option>'}
+TS.innerHTML='<option value="">اختار اليوم أولًا</option>';
+var pp=document.getElementById('pp');for(var k=1;k<=12;k++)pp.innerHTML+='<option>'+k+'</option>';pp.value=2;
+function msg(){var nm=document.getElementById('nm').value.trim()||'—',nt=document.getElementById('nt').value.trim();
+ return 'السلام عليكم، أود حجز طاولة في Mokhito.\n👤 الاسم: '+nm+'\n📅 اليوم: '+DN[selD.getDay()]+' '+selD.getDate()+' '+MN[selD.getMonth()]+'\n⏰ الموعد: '+f12(selT)+'\n👥 عدد الأفراد: '+pp.value+'\n📍 المكان: '+document.getElementById('zn').value+(nt?'\n📝 ملاحظات: '+nt:'')+'\nبرجاء تأكيد التوافر. شكرًا'}
+function upd(){document.getElementById('pv').textContent=(selD&&selT)?msg():'اختار اليوم والوقت لتظهر الرسالة'}
+DS.onchange=function(){selD=DS.value===''?null:DAYS[+DS.value];if(selD)fillTimes();else{TS.innerHTML='<option value="">اختار اليوم أولًا</option>';selT=null}upd()};
+TS.onchange=function(){selT=TS.value||null;upd()};
+['nm','nt','pp','zn'].forEach(function(id){document.getElementById(id).oninput=upd});
+document.getElementById('go').onclick=function(){if(!selD||!selT){alert('اختار اليوم والوقت الأول');return}window.open('https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(msg()),'_blank')};
+upd();
+var io=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.1});
+document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
+</script>
 </body>
 </html>
