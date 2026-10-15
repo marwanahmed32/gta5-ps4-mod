@@ -3,138 +3,144 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
-<meta name="theme-color" content="#2a0b10"/>
-<title>MOKHITO — مطعم وكافيه | القاهرة</title>
+<title>Mokhito — مطعم وكافيه | القاهرة</title>
 <meta name="description" content="Mokhito — مطعم وكافيه في القاهرة. الأطباق وحجز طاولة عبر واتساب."/>
 <style>
-:root{--bg:#2a0b10;--bg2:#36111a;--ink:#f3e6d8;--mut:#b99f94;--ac:#ff7a59;--line:rgba(243,230,216,.18);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:light){:root:not([data-theme="dark"]){--bg:#f3e6d8;--bg2:#eadbc9;--ink:#2a0b10;--mut:#7d5e57;--ac:#c9391f;--line:rgba(42,11,16,.2)}}
-:root[data-theme="light"]{--bg:#f3e6d8;--bg2:#eadbc9;--ink:#2a0b10;--mut:#7d5e57;--ac:#c9391f;--line:rgba(42,11,16,.2)}
+/* الوضع الافتراضي: ذهبي على أسود. زر ◐ في القائمة يبدّل لكحلي على أبيض */
+:root{--bg:#0a0a0a;--bg2:#131210;--ink:#efe6d2;--mut:#a89c82;--gold:#c9a24a;--gold2:#e8cd86;--line:rgba(201,162,74,.35);--on:#0a0a0a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+:root[data-theme="light"]{--bg:#ffffff;--bg2:#f4f6fa;--ink:#12213f;--mut:#5a6784;--gold:#12306b;--gold2:#2a4f9a;--line:rgba(18,48,107,.3);--on:#ffffff}
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--ink);font-family:'Cairo','Segoe UI',Tahoma,Arial,sans-serif;line-height:1.7;overflow-x:hidden}
-.mono{font-family:'Courier New',monospace;letter-spacing:2px;font-size:11px;text-transform:uppercase;direction:ltr}
-#pg{position:fixed;top:env(safe-area-inset-top,0px);right:0;height:3px;background:var(--ac);width:0;z-index:60}
-header{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:18px 24px;mix-blend-mode:difference;color:#fff}
-header b{font-size:18px;letter-spacing:3px;direction:ltr}
-.bg{background:none;border:0;color:inherit;font:inherit;cursor:pointer;display:flex;align-items:center;gap:10px}
-.bg i{display:block;width:30px;height:10px;border-top:2px solid currentColor;border-bottom:2px solid currentColor}
-.ov{position:fixed;inset:0;background:var(--ac);color:#1a0508;z-index:55;display:flex;flex-direction:column;justify-content:center;padding:40px;clip-path:circle(0 at 0 0);transition:clip-path .7s cubic-bezier(.7,0,.2,1)}
-.ov.on{clip-path:circle(150% at 0 0)}
-.ov a{font-size:clamp(40px,10vw,90px);font-weight:900;color:inherit;text-decoration:none;line-height:1.15;display:flex;gap:16px;align-items:baseline;transition:transform .3s}
-.ov a:hover{transform:translateX(-14px)}
-.ov a small{font-size:12px;font-family:'Courier New',monospace}
-.ov .x{position:absolute;top:calc(18px + env(safe-area-inset-top,0px));left:24px;background:none;border:0;font:inherit;font-weight:800;cursor:pointer;color:inherit}
-.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 24px 40px;border-bottom:1px solid var(--line)}
-.hero h1{font-size:clamp(60px,21vw,260px);line-height:.82;font-weight:900;letter-spacing:-.05em;direction:ltr;text-align:right;color:var(--ac);margin-bottom:26px}
-.meta{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:16px;color:var(--mut)}
-.meta p{max-width:340px;font-size:15px;color:var(--ink)}
-.sec{padding:90px 24px;border-bottom:1px solid var(--line);max-width:1100px;margin:0 auto;display:grid;grid-template-columns:110px 1fr;gap:20px}
-.n{font-size:64px;font-weight:900;color:transparent;-webkit-text-stroke:1px var(--ac);line-height:1;direction:ltr;text-align:right}
-.big{font-size:clamp(26px,4.6vw,50px);font-weight:700;line-height:1.35}
-.big em{font-style:normal;color:var(--ac)}
-.sm{color:var(--mut);margin-top:18px;max-width:480px}
-.ac{border-top:1px solid var(--line)}
-.ac button{width:100%;background:none;border:0;border-bottom:1px solid var(--line);color:var(--ink);font:inherit;padding:20px 0;display:grid;grid-template-columns:50px 1fr 30px;align-items:center;text-align:right;cursor:pointer;transition:color .3s}
-.ac button:hover,.ac button.on{color:var(--ac)}
-.ac button span:nth-child(2){font-size:clamp(20px,3.4vw,30px);font-weight:700;direction:ltr;text-align:right}
-.ac button span:last-child{font-size:24px;transition:transform .35s;text-align:left}
-.ac button.on span:last-child{transform:rotate(45deg)}
-.ac .p{max-height:0;overflow:hidden;transition:max-height .45s;color:var(--mut);border-bottom:1px solid var(--line)}
-.ac .p div{padding:4px 50px 22px}
-.ac .p.on{max-height:120px}
-.note{font-size:12px;color:var(--mut);margin-top:16px}
-.ml{font-size:clamp(22px,4vw,40px);font-weight:700;line-height:2.3}
-.ml select,.ml input{font:inherit;font-weight:900;color:var(--ac);background:transparent;border:0;border-bottom:2px solid var(--ac);border-radius:0;padding:0 6px;outline:none;max-width:100%;cursor:pointer}
-.ml input{width:7em}
-.ml select option{color:#2a0b10;background:#f3e6d8;font-size:16px}
-.ml textarea{display:block;width:100%;margin-top:6px;font:inherit;font-size:15px;color:var(--ink);background:var(--bg2);border:1px solid var(--line);padding:12px;outline:none}
-.prev{white-space:pre-wrap;margin-top:26px;border:1px dashed var(--line);padding:16px;font-size:13px;color:var(--mut)}
-.send{margin-top:22px;background:var(--ac);color:#1a0508;border:0;padding:16px 36px;font:inherit;font-weight:900;font-size:16px;cursor:pointer;transition:transform .25s}
-.send:hover{transform:translateX(-8px)}
-.vis a{display:inline-block;margin-top:24px;font-size:clamp(28px,6vw,64px);font-weight:900;color:var(--ink);text-decoration:none;border-bottom:3px solid var(--ac);transition:color .3s}
-.vis a:hover{color:var(--ac)}
-footer{padding:30px 24px 50px;color:var(--mut);display:flex;justify-content:space-between}
-.rv{opacity:0;transform:translateY(30px);transition:1s}.rv.in{opacity:1;transform:none}
-@media(max-width:700px){.sec{grid-template-columns:1fr;gap:6px;padding:70px 22px}.n{font-size:44px}.ac button{grid-template-columns:34px 1fr 24px}.ac .p div{padding-inline-start:34px}}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{background:var(--bg);color:var(--ink);font-family:'Cairo','Segoe UI',Tahoma,Arial,sans-serif;line-height:1.9;overflow-x:hidden;transition:background .4s,color .4s}
+.serif{font-family:Georgia,'Times New Roman',serif}
+.gt{background:linear-gradient(135deg,var(--gold),var(--gold2),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:30;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:12px 24px}
+nav .lg{font-size:24px;letter-spacing:2px;direction:ltr}
+nav .ln{display:flex;gap:22px;align-items:center}
+nav a{color:var(--mut);text-decoration:none;font-size:13px;transition:color .25s}
+nav a:hover{color:var(--gold)}
+.th{background:none;border:1px solid var(--line);color:var(--gold);width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:15px}
+.hero{padding:34px 20px;min-height:90vh;display:flex}
+.frame{flex:1;border:1px solid var(--line);outline:1px solid var(--line);outline-offset:-10px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:50px 24px;background:radial-gradient(ellipse at 50% 0%,color-mix(in srgb,var(--gold) 16%,transparent),transparent 65%)}
+.kick{font-size:11px;letter-spacing:6px;color:var(--gold);direction:ltr;text-transform:uppercase}
+.hero h1{font-size:clamp(40px,7vw,68px);font-weight:400;letter-spacing:3px;margin:14px 0;direction:ltr}
+.orn{display:flex;align-items:center;gap:12px;color:var(--gold);margin:6px 0 18px}
+.orn:before,.orn:after{content:"";width:64px;height:1px;background:var(--gold)}
+.orn i{width:7px;height:7px;transform:rotate(45deg);background:var(--gold)}
+.hero p{max-width:440px;color:var(--mut)}
+.btns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:28px}
+.btn{padding:12px 32px;border:1px solid var(--gold);color:var(--gold);text-decoration:none;font-size:14px;letter-spacing:1px;transition:.3s;background:none;font-family:inherit;cursor:pointer}
+.btn:hover,.btn.f{background:var(--gold);color:var(--on)}
+.btn.f:hover{background:transparent;color:var(--gold)}
+section{max-width:980px;margin:0 auto;padding:80px 24px}
+.hd{text-align:center;margin-bottom:44px}
+.hd h2{font-size:clamp(28px,4.5vw,40px);font-weight:400}
+.hd .kick{margin-bottom:4px}
+.hd .orn{justify-content:center;margin-bottom:0}
+.about{display:grid;grid-template-columns:1fr 1fr;gap:54px;align-items:center}
+.about p{color:var(--mut);margin-bottom:12px}
+.fx div{display:flex;justify-content:space-between;padding:15px 0;border-bottom:1px solid var(--line);font-size:14px}
+.fx div:first-child{border-top:1px solid var(--line)}.fx span{color:var(--gold)}
+.menu{max-width:640px;margin:0 auto;border:1px solid var(--line);padding:14px 34px;background:var(--bg2)}
+.d{padding:20px 0;text-align:center;border-bottom:1px solid var(--line)}
+.d:last-child{border:0}
+.d h3{font-size:22px;font-weight:400;direction:ltr;letter-spacing:1px}
+.d p{font-size:13px;color:var(--mut)}
+.note{font-size:12px;color:var(--mut);text-align:center;margin-top:18px}
+.gal{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.gal div{aspect-ratio:4/5;border:1px solid var(--line);display:grid;place-items:center;color:var(--mut);font-size:12px;letter-spacing:1px;background:linear-gradient(160deg,var(--bg2),var(--bg))}
+form{max-width:640px;margin:0 auto;border:1px solid var(--line);outline:1px solid var(--line);outline-offset:-8px;padding:38px 30px;display:grid;gap:20px;background:var(--bg2)}
+label{font-size:11px;letter-spacing:2px;color:var(--gold);display:block;margin-bottom:4px}
+input,select,textarea{width:100%;padding:12px 4px;border:0;border-bottom:1px solid var(--line);background:transparent;color:var(--ink);font:inherit;border-radius:0;outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--gold)}
+option{color:#111;background:#fff}
+.row{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:22px}
+.prev{white-space:pre-wrap;border:1px dashed var(--line);padding:14px;font-size:13px;color:var(--mut)}
+.vs{text-align:center;border-top:1px solid var(--line)}
+.vs p{color:var(--mut);margin-bottom:22px}
+footer{text-align:center;color:var(--mut);font-size:11px;letter-spacing:4px;padding:26px 20px 50px;border-top:1px solid var(--line)}
+.rv{opacity:0;transform:translateY(20px);transition:opacity .9s,transform .9s}.rv.in{opacity:1;transform:none}
+@media(max-width:720px){.about{grid-template-columns:1fr;gap:28px}nav .ln a{display:none}.gal{gap:8px}section{padding:60px 20px}.menu{padding:8px 20px}}
 </style>
 </head>
 <body>
-<div id="pg"></div>
-<header><b>MOKHITO</b><button class="bg" id="op"><span class="mono">Menu</span><i></i></button></header>
-<div class="ov" id="ov"><button class="x" id="cl">إغلاق ✕</button>
-  <a href="#about"><small>01</small>عن المكان</a><a href="#dishes"><small>02</small>الأطباق</a><a href="#book"><small>03</small>الحجز</a><a href="#visit"><small>04</small>الموقع</a></div>
+<nav><div class="lg serif gt">Mokhito</div><div class="ln"><a href="#about">عن المكان</a><a href="#menu">الأطباق</a><a href="#book">الحجز</a><a href="#visit">الموقع</a><button class="th" id="th" title="تبديل الألوان">◐</button></div></nav>
 
-<section class="hero" id="top">
-  <div class="mono" style="color:var(--mut);margin-bottom:auto;padding-top:90px">Restaurant &amp; Café — Cairo</div>
-  <h1>MOKHITO</h1>
-  <div class="meta"><p>باستا وبيتزا وقهوة. جلسات داخلية وخارجية، وأكل بصوصات غنية.</p><div class="mono">Scroll ↓</div></div>
+<header class="hero"><div class="frame">
+  <div class="kick">Restaurant &amp; Café · Cairo</div>
+  <h1 class="serif gt">Mokhito</h1>
+  <div class="orn"><i></i></div>
+  <p>باستا وبيتزا وقهوة، في مكان هادي بجلسات داخلية وخارجية.</p>
+  <div class="btns"><a class="btn f" href="#book">احجز طاولة</a><a class="btn" href="#menu">الأطباق</a></div>
+</div></header>
+
+<section id="about" class="rv">
+  <div class="hd"><div class="kick">About</div><h2 class="serif gt">عن المكان</h2><div class="orn"><i></i></div></div>
+  <div class="about">
+    <div><p>زوار المكان بيمدحوا الباستا والصوصات الغنية والبيتزا الرقيقة والحلويات الإيطالية، والخدمة الودودة اللي بتلبي الطلبات الخاصة.</p><p>مناسب لفطار وقهوة أو غدا أو عشا، سواء قعدت جوه أو بره.</p></div>
+    <div class="fx"><div><span>الأجواء</span><b>هادية ومريحة</b></div><div><span>الجلسات</span><b>داخلية وخارجية</b></div><div><span>الفترة</span><b>فطار · غدا · عشا</b></div><div><span>الحجز</span><b>عبر واتساب</b></div></div>
+  </div>
 </section>
 
-<section class="sec rv" id="about"><div class="n">01</div>
-  <div><div class="big">مكان هادي، <em>أكل بيتي،</em> وقعدة تطول.</div>
-  <p class="sm">زوار المكان بيمدحوا الباستا والصوصات والبيتزا الرقيقة والحلويات الإيطالية، والخدمة اللي بتلبي الطلبات الخاصة. فطار، قهوة، غدا أو عشا، جوه أو بره.</p></div></section>
+<section id="menu" class="rv">
+  <div class="hd"><div class="kick">Signature</div><h2 class="serif gt">أطباق يمدحها الزوار</h2><div class="orn"><i></i></div></div>
+  <div class="menu">
+    <div class="d"><h3 class="serif">Pasta Siciliana</h3><p>باستا بصوص طماطم ومارينارا</p></div>
+    <div class="d"><h3 class="serif">Shrimp &amp; Spinach Pasta</h3><p>باستا بالجمبري والسبانخ</p></div>
+    <div class="d"><h3 class="serif">Chicken Pesto</h3><p>باستا بالدجاج وصوص البيستو</p></div>
+    <div class="d"><h3 class="serif">Neapolitan Pizza</h3><p>بيتزا رقيقة بالريحان الطازج</p></div>
+    <div class="d"><h3 class="serif">Pesto Focaccia</h3><p>فوكاتشيا بالبيستو</p></div>
+    <div class="d"><h3 class="serif">Italian Desserts</h3><p>حلويات إيطالية تقليدية</p></div>
+  </div>
+  <p class="note">* أطباق من تقييمات عامة، والمنيو الكامل بالأسعار يتضاف من المطعم.</p>
+</section>
 
-<section class="sec rv" id="dishes"><div class="n">02</div>
-  <div><div class="big" style="margin-bottom:28px">أطباق <em>يمدحها</em> الزوار</div>
-  <div class="ac" id="ac"></div>
-  <p class="note">* الأطباق من تقييمات عامة للمكان، والمنيو الكامل بالأسعار يتضاف من المطعم.</p></div></section>
+<section class="rv"><div class="gal"><div>صورة 1</div><div>صورة 2</div><div>صورة 3</div></div></section>
 
-<section class="sec rv" id="book"><div class="n">03</div>
-  <div class="ml">
-    أحب أحجز طاولة يوم <select id="dsel"></select>
-    الساعة <select id="tsel"></select>
-    لعدد <select id="pp"></select> أفراد
-    في <select id="zn"><option>أي مكان متاح</option><option>الجلسة الخارجية</option><option>الداخل</option></select>
-    باسم <input id="nm" placeholder="اسمك"/>
-    <textarea id="nt" rows="2" placeholder="ملاحظات (اختياري): مناسبة، كرسي أطفال..."></textarea>
+<section id="book" class="rv">
+  <div class="hd"><div class="kick">Reservation</div><h2 class="serif gt">احجز طاولتك</h2><div class="orn"><i></i></div></div>
+  <form onsubmit="return false">
+    <div class="row"><div><label>اليوم</label><select id="dsel"></select></div><div><label>الميعاد</label><select id="tsel"></select></div></div>
+    <div class="row"><div><label>الاسم</label><input id="nm" placeholder="اسمك"/></div><div><label>عدد الأفراد</label><select id="pp"></select></div><div><label>المكان</label><select id="zn"><option>أي مكان متاح</option><option>جلسة خارجية</option><option>داخلي</option></select></div></div>
+    <div><label>ملاحظات (اختياري)</label><textarea id="nt" rows="2" placeholder="مناسبة، كرسي أطفال..."></textarea></div>
     <div class="prev" id="pv"></div>
-    <button class="send" id="go">إرسال الطلب عبر واتساب ←</button>
-    <p class="note">الطلب غير مؤكد حتى يرد المطعم ويؤكد التوافر.</p>
-  </div></section>
+    <button class="btn f" id="go" type="button">إرسال طلب الحجز عبر واتساب</button>
+    <p class="note" style="margin:0">الطلب غير مؤكد حتى يرد المطعم ويؤكد التوافر.</p>
+  </form>
+</section>
 
-<section class="sec rv vis" id="visit"><div class="n">04</div>
-  <div><div class="big">تعالى <em>زورنا</em> في المنيل</div>
-  <a href="https://maps.app.goo.gl/qy3ge4Giy2mt8o2NA" target="_blank" rel="noopener">افتح الخريطة ↗</a></div></section>
-<footer class="mono"><span>© MOKHITO</span><span>Cairo</span></footer>
+<div class="vs"><section id="visit" class="rv">
+  <div class="hd"><div class="kick">Visit</div><h2 class="serif gt">الموقع</h2><div class="orn"><i></i></div></div>
+  <p>المنيل، القاهرة</p>
+  <a class="btn" href="https://maps.app.goo.gl/qy3ge4Giy2mt8o2NA" target="_blank" rel="noopener">افتح في خرائط جوجل</a>
+</section></div>
+<footer>MOKHITO · CAIRO</footer>
 
 <script>
 var WA_NUMBER=""; // رقم المطعم بصيغة دولية بدون + مثال: 2010xxxxxxxx
-var D=[["Pasta Siciliana","باستا بصوص طماطم ومارينارا، من أكتر الأطباق اللي الزوار بيمدحوها."],["Shrimp & Spinach Pasta","باستا بالجمبري والسبانخ."],["Chicken Pesto","باستا بالدجاج وصوص البيستو."],["Neapolitan Pizza","بيتزا إيطالية رقيقة بالريحان الطازج."],["Pesto Focaccia","فوكاتشيا بالبيستو."],["Italian Desserts & Coffee","حلويات إيطالية وقهوة لقعدة هادية."]];
-var ac=document.getElementById('ac');
-D.forEach(function(x,i){var b=document.createElement('button'),p=document.createElement('div');b.innerHTML='<span class="mono">0'+(i+1)+'</span><span>'+x[0]+'</span><span>+</span>';p.className='p';p.innerHTML='<div>'+x[1]+'</div>';
- b.onclick=function(){var o=p.classList.contains('on');document.querySelectorAll('.ac .p').forEach(function(q){q.classList.remove('on')});document.querySelectorAll('.ac button').forEach(function(q){q.classList.remove('on')});if(!o){p.classList.add('on');b.classList.add('on')}};
- ac.appendChild(b);ac.appendChild(p)});
-
-var ov=document.getElementById('ov');
-document.getElementById('op').onclick=function(){ov.classList.add('on')};
-function cl(){ov.classList.remove('on')}
-document.getElementById('cl').onclick=cl;ov.querySelectorAll('a').forEach(function(a){a.onclick=cl});
-var pg=document.getElementById('pg');
-addEventListener('scroll',function(){var h=document.documentElement;pg.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%'});
-
+document.getElementById('th').onclick=function(){var r=document.documentElement;r.dataset.theme=r.dataset.theme=='light'?'':'light'};
 var DN=['الأحد','الإثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'],MN=['يناير','فبراير','مارس','أبريل','مايو','يونيو','يوليو','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
 var TIMES=[];for(var h=12;h<=23;h++){TIMES.push(h+':00');TIMES.push(h+':30')}
 var selD=null,selT=null,DS=document.getElementById('dsel'),TS=document.getElementById('tsel'),now=new Date(),DAYS=[];
 function f12(t){var p=t.split(':'),h=+p[0];return(h>12?h-12:h)+':'+p[1]+' '+(h>=12?'م':'ص')}
 function fillTimes(){var td=selD&&selD.toDateString()==new Date().toDateString(),n=new Date(),c=0;
- TS.innerHTML='<option value="">اختار الوقت</option>';selT=null;
+ TS.innerHTML='<option value="">— اختار الميعاد —</option>';selT=null;
  TIMES.forEach(function(t){var p=t.split(':');if(td&&(+p[0]*60+ +p[1])<=n.getHours()*60+n.getMinutes()+60)return;TS.innerHTML+='<option value="'+t+'">'+f12(t)+'</option>';c++});
- if(!c)TS.innerHTML='<option value="">لا مواعيد اليوم</option>'}
-DS.innerHTML='<option value="">اختار اليوم</option>';
+ if(!c)TS.innerHTML='<option value="">لا مواعيد متبقية اليوم</option>'}
+DS.innerHTML='<option value="">— اختار اليوم —</option>';
 for(var i=0;i<14;i++){var d=new Date(now);d.setDate(now.getDate()+i);DAYS.push(d);
  DS.innerHTML+='<option value="'+i+'">'+(i==0?'اليوم — ':i==1?'بكرة — ':'')+DN[d.getDay()]+' '+d.getDate()+' '+MN[d.getMonth()]+'</option>'}
-TS.innerHTML='<option value="">اختار اليوم أولًا</option>';
+TS.innerHTML='<option value="">اختار اليوم الأول</option>';
 var pp=document.getElementById('pp');for(var k=1;k<=12;k++)pp.innerHTML+='<option>'+k+'</option>';pp.value=2;
 function msg(){var nm=document.getElementById('nm').value.trim()||'—',nt=document.getElementById('nt').value.trim();
  return 'السلام عليكم، أود حجز طاولة في Mokhito.\n👤 الاسم: '+nm+'\n📅 اليوم: '+DN[selD.getDay()]+' '+selD.getDate()+' '+MN[selD.getMonth()]+'\n⏰ الموعد: '+f12(selT)+'\n👥 عدد الأفراد: '+pp.value+'\n📍 المكان: '+document.getElementById('zn').value+(nt?'\n📝 ملاحظات: '+nt:'')+'\nبرجاء تأكيد التوافر. شكرًا'}
-function upd(){document.getElementById('pv').textContent=(selD&&selT)?msg():'اختار اليوم والوقت لتظهر الرسالة'}
-DS.onchange=function(){selD=DS.value===''?null:DAYS[+DS.value];if(selD)fillTimes();else{TS.innerHTML='<option value="">اختار اليوم أولًا</option>';selT=null}upd()};
+function upd(){document.getElementById('pv').textContent=(selD&&selT)?msg():'اختار اليوم والميعاد لتظهر الرسالة'}
+DS.onchange=function(){selD=DS.value===''?null:DAYS[+DS.value];if(selD)fillTimes();else{TS.innerHTML='<option value="">اختار اليوم الأول</option>';selT=null}upd()};
 TS.onchange=function(){selT=TS.value||null;upd()};
 ['nm','nt','pp','zn'].forEach(function(id){document.getElementById(id).oninput=upd});
-document.getElementById('go').onclick=function(){if(!selD||!selT){alert('اختار اليوم والوقت الأول');return}window.open('https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(msg()),'_blank')};
+document.getElementById('go').onclick=function(){if(!selD||!selT){alert('اختار اليوم والميعاد الأول');return}window.open('https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(msg()),'_blank')};
 upd();
-var io=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.1});
+var io=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.08});
 document.querySelectorAll('.rv').forEach(function(el){io.observe(el)});
 </script>
 </body>
